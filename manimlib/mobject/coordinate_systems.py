@@ -44,7 +44,7 @@ class CoordinateSystem():
         "default_y_range": [-4.0, 4.0, 1.0],
         "width": FRAME_WIDTH,
         "height": FRAME_HEIGHT,
-        "num_sampled_graph_points_per_tick": 20,
+        "num_sampled_graph_points_per_tick": 50,
     }
 
     def __init__(self, **kwargs):
