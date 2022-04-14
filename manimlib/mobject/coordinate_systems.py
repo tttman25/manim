@@ -333,7 +333,8 @@ class CoordinateSystem():
             height = get_norm(
                 self.i2gp(sample, graph) - self.c2p(sample, 0)
             )
-            rect = Rectangle(width=self.x_axis.n2p(x1)[0] - self.x_axis.n2p(x0)[0], 
+            #rect = Rectangle(width=x1 - x0, height=height)
+            rect = Rectangle(width=self.x_axis.n2p(x1)[0] - self.x_axis.n2p(x0)[0],
                              height=height)
             rect.move_to(self.c2p(x0, 0), DL)
             rects.append(rect)
