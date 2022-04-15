@@ -38,7 +38,6 @@ from manimlib.event_handler import EVENT_DISPATCHER
 from manimlib.event_handler.event_listner import EventListner
 from manimlib.event_handler.event_type import EventType
 
-
 TimeBasedUpdater = Callable[["Mobject", float], None]
 NonTimeUpdater = Callable[["Mobject"], None]
 Updater = Union[TimeBasedUpdater, NonTimeUpdater]
@@ -809,14 +808,14 @@ class Mobject(object):
             mob = mobject_or_point
             if index_of_submobject_to_align is not None:
                 target_aligner = mob[index_of_submobject_to_align]
-            else:
+            else:  # decimal number enters here
                 target_aligner = mob
             target_point = target_aligner.get_bounding_box_point(
                 aligned_edge + direction
             )
         else:
             target_point = mobject_or_point
-        if submobject_to_align is not None:
+        if submobject_to_align is not None:  # <--- should be entering here but isn't
             aligner = submobject_to_align
         elif index_of_submobject_to_align is not None:
             aligner = self[index_of_submobject_to_align]

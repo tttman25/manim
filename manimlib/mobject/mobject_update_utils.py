@@ -3,6 +3,7 @@ from __future__ import annotations
 import inspect
 from typing import Callable
 
+from manimlib import Line
 from manimlib.constants import DEGREES
 from manimlib.constants import RIGHT
 from manimlib.mobject.mobject import Mobject
