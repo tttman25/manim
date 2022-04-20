@@ -3,10 +3,10 @@ from __future__ import annotations
 import inspect
 from typing import Callable
 
-from manimlib import Line
+from manimlib import Line, NumberPlane
 from manimlib.constants import DEGREES
 from manimlib.constants import RIGHT
-from manimlib.mobject.mobject import Mobject
+from manimlib.mobject.mobject import Mobject, Point
 from manimlib.utils.simple_functions import clip
 
 from typing import TYPE_CHECKING
@@ -23,7 +23,6 @@ def assert_is_mobject_method(method):
 
 
 def always(method, *args, **kwargs):
-    assert_is_mobject_method(method)
     mobject = method.__self__
     func = method.__func__
     mobject.add_updater(lambda m: func(m, *args, **kwargs))

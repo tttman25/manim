@@ -14,9 +14,9 @@ class Test(Scene):
         # brace = always_redraw(Brace, line, UP)
 
         distance = DecimalNumber(0, num_decimal_places=2)
-        distance.next_to(line, UP)
+        # distance.next_to(line, UP)
 
-        #always(distance.next_to, line, UP)
+        always(distance.next_to, p1, UP)
         # f_always(distance.set_value, lambda: line.get_length() / SCALE)
         # f_always(brace.rotate, line.get_angle)
 
@@ -31,4 +31,4 @@ class Test(Scene):
             self.play(
                 line.animate.set_angle(line.get_angle() + 15 * DEGREES)
             )
-            self.wait(5)
+            self.wait(0.5)

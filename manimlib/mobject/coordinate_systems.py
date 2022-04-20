@@ -358,6 +358,7 @@ class Axes(VGroup, CoordinateSystem):
         "axis_config": {
             "include_tip": False,
             "numbers_to_exclude": [0],
+            "color": WHITE,
         },
         "x_axis_config": {},
         "y_axis_config": {

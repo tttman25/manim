@@ -12,6 +12,7 @@ import moderngl
 import numpy as np
 import numpy.typing as npt
 
+import manimlib
 from manimlib.constants import *
 from manimlib.utils.color import color_gradient
 from manimlib.utils.color import get_colormap_list
@@ -572,7 +573,6 @@ class Mobject(object):
             updater_list.append(update_function)
         else:
             updater_list.insert(index, update_function)
-
         self.refresh_has_updater_status()
         if call_updater:
             self.update(dt=0)

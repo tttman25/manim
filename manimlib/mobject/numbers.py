@@ -23,6 +23,7 @@ class DecimalNumber(VMobject):
         "include_background_rectangle": False,
         "edge_to_fix": LEFT,
         "font_size": 48,
+        "font": None,
         "text_config": {} # Do not pass in font_size here
     }
 
