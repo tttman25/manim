@@ -1108,6 +1108,9 @@ class VMobject(Mobject):
 
 
 class VGroup(VMobject):
+    CONFIG = {
+        "stroke_color": BLACK
+    }
     def __init__(self, *vmobjects: VMobject, **kwargs):
         if not all([isinstance(m, VMobject) for m in vmobjects]):
             raise Exception("All submobjects must be of type VMobject")
