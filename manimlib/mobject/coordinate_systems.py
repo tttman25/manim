@@ -440,6 +440,10 @@ class Axes(VGroup, CoordinateSystem):
             self.coordinate_labels.add(labels)
         return self.coordinate_labels
 
+    def set_color(self, color: ManimColor, recurse: bool = True):
+        self.set_fill(color, recurse=recurse)
+        self.set_stroke(color, recurse=recurse)
+        return self
 
 class ThreeDAxes(Axes):
     CONFIG = {

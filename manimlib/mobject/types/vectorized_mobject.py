@@ -41,7 +41,7 @@ class VMobject(Mobject):
     CONFIG = {
         "fill_color": None,
         "fill_opacity": 0.0,
-        "stroke_color": BLACK,
+        "stroke_color": None,
         "stroke_opacity": 1.0,
         "stroke_width": DEFAULT_STROKE_WIDTH,
         "draw_stroke_behind_fill": False,
