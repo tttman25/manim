@@ -7,4 +7,5 @@ class Get_RiemannRectangle_issue(Scene):
         rect_left = ax.get_riemann_rectangles(graph, [1.0, 6.0], 0.25, "left", 1, GREEN)
 
         self.add(ax, graph, rect_left)
+        #comment
 
