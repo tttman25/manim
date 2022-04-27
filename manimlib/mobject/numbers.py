@@ -131,12 +131,14 @@ class DecimalNumber(VMobject):
         ])
 
     def set_value(self, number: float | complex):
+        store_color = self.get_color()
         move_to_point = self.get_edge_center(self.edge_to_fix)
         old_submobjects = list(self.submobjects)
         self.set_submobjects_from_number(number)
         self.move_to(move_to_point, self.edge_to_fix)
         for sm1, sm2 in zip(self.submobjects, old_submobjects):
             sm1.match_style(sm2)
+        self.set_color(store_color)
         return self
 
     def _handle_scale_side_effects(self, scale_factor: float) -> None:
