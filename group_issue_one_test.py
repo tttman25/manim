@@ -16,3 +16,6 @@ class Issue1Recreation(Scene):
             color=RED,
         )
         self.play(ShowCreation(graph))
+
+
+
