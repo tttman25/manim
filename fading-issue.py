@@ -15,8 +15,8 @@ class Issue2Recreation(Scene):
         # mob = Line().set_color([BLUE, RED])
         # mob = Line().set_opacity(opacity=[0, 1])
 
-        dot = Arrow()
-        self.add(dot)
+        dot = FillArrow()
+        self.add(mob)
         self.wait()
-        # self.play(Transform(mob, dot))
-        # self.wait()
+        self.play(Transform(mob, dot))
+        self.wait()

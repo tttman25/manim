@@ -491,6 +491,20 @@ class ThreeDAxes(Axes):
     def get_all_ranges(self) -> list[Sequence[float]]:
         return [self.x_range, self.y_range, self.z_range]
 
+    def to_corner(
+        self,
+        corner: np.ndarray = LEFT + DOWN,
+        buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
+    ):
+        return self.fix_in_frame()
+
+    def to_edge(
+        self,
+        edge: np.ndarray = LEFT,
+        buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
+    ):
+        return self.fix_in_frame()
+
 
 class NumberPlane(Axes):
     CONFIG = {
