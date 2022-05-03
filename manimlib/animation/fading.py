@@ -145,7 +145,6 @@ class FadeTransformPieces(FadeTransform):
             return
         self.mobject[0].align_family(self.mobject[1])
         super().begin()
-        print('Going here')
 
     def ghost_to(self, source: Mobject, target: Mobject) -> None:
         if isinstance(self.mobject[0], Tex):
@@ -154,7 +153,6 @@ class FadeTransformPieces(FadeTransform):
             return
         for sm0, sm1 in zip(source.get_family(), target.get_family()):
             super().ghost_to(sm0, sm1)
-            print('going there')
 
 
 class VFadeIn(Animation):
