@@ -335,8 +335,7 @@ class CoordinateSystem():
             )
             left = self.x_axis.n2p(x1)[0]
             right = self.x_axis.n2p(x0)[0]
-
-            rect = Rectangle(width=left - right, height=height)
+            rect = Rectangle(width=right - left, height=height)
             rect.move_to(self.c2p(x0, 0), DL)
             rects.append(rect)
         result = VGroup(*rects)
