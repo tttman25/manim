@@ -1,5 +1,3 @@
-import self as self
-from sympy.polys.benchmarks.bench_groebnertools import x1
 
 from manimlib import *
 
