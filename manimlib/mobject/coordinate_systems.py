@@ -27,9 +27,9 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     import colour
     from manimlib.mobject.mobject import Mobject
+
     T = TypeVar("T", bound=Mobject)
     ManimColor = Union[str, colour.Color, Sequence[float]]
-
 
 EPSILON = 1e-8
 
@@ -92,11 +92,11 @@ class CoordinateSystem():
         return self.get_axis(2)
 
     def get_x_axis_label(
-        self,
-        label_tex: str,
-        edge: np.ndarray = RIGHT,
-        direction: np.ndarray = DL,
-        **kwargs
+            self,
+            label_tex: str,
+            edge: np.ndarray = RIGHT,
+            direction: np.ndarray = DL,
+            **kwargs
     ) -> Tex:
         return self.get_axis_label(
             label_tex, self.get_x_axis(),
@@ -104,11 +104,11 @@ class CoordinateSystem():
         )
 
     def get_y_axis_label(
-        self,
-        label_tex: str,
-        edge: np.ndarray = UP,
-        direction: np.ndarray = DR,
-        **kwargs
+            self,
+            label_tex: str,
+            edge: np.ndarray = UP,
+            direction: np.ndarray = DR,
+            **kwargs
     ) -> Tex:
         return self.get_axis_label(
             label_tex, self.get_y_axis(),
@@ -116,12 +116,12 @@ class CoordinateSystem():
         )
 
     def get_axis_label(
-        self,
-        label_tex: str,
-        axis: np.ndarray,
-        edge: np.ndarray,
-        direction: np.ndarray,
-        buff: float = MED_SMALL_BUFF
+            self,
+            label_tex: str,
+            axis: np.ndarray,
+            edge: np.ndarray,
+            direction: np.ndarray,
+            buff: float = MED_SMALL_BUFF
     ) -> Tex:
         label = Tex(label_tex)
         label.next_to(
@@ -132,9 +132,9 @@ class CoordinateSystem():
         return label
 
     def get_axis_labels(
-        self,
-        x_label_tex: str = "x",
-        y_label_tex: str = "y"
+            self,
+            x_label_tex: str = "x",
+            y_label_tex: str = "y"
     ) -> VGroup:
         self.axis_labels = VGroup(
             self.get_x_axis_label(x_label_tex),
@@ -143,12 +143,12 @@ class CoordinateSystem():
         return self.axis_labels
 
     def get_line_from_axis_to_point(
-        self, 
-        index: int,
-        point: np.ndarray,
-        line_func: Type[T] = DashedLine,
-        color: ManimColor = GREY_A,
-        stroke_width: float = 2
+            self,
+            index: int,
+            point: np.ndarray,
+            line_func: Type[T] = DashedLine,
+            color: ManimColor = GREY_A,
+            stroke_width: float = 2
     ) -> T:
         axis = self.get_axis(index)
         line = line_func(axis.get_projection(point), point)
@@ -163,10 +163,10 @@ class CoordinateSystem():
 
     # Useful for graphing
     def get_graph(
-        self,
-        function: Callable[[float], float],
-        x_range: Sequence[float] | None = None,
-        **kwargs
+            self,
+            function: Callable[[float], float],
+            x_range: Sequence[float] | None = None,
+            **kwargs
     ) -> ParametricCurve:
         t_range = np.array(self.x_range, dtype=float)
         if x_range is not None:
@@ -187,9 +187,9 @@ class CoordinateSystem():
         return graph
 
     def get_parametric_curve(
-        self,
-        function: Callable[[float], np.ndarray],
-        **kwargs
+            self,
+            function: Callable[[float], np.ndarray],
+            **kwargs
     ) -> ParametricCurve:
         dim = self.dimension
         graph = ParametricCurve(
@@ -200,9 +200,9 @@ class CoordinateSystem():
         return graph
 
     def input_to_graph_point(
-        self,
-        x: float,
-        graph: ParametricCurve
+            self,
+            x: float,
+            graph: ParametricCurve
     ) -> np.ndarray | None:
         if hasattr(graph, "underlying_function"):
             return self.coords_to_point(x, graph.underlying_function(x))
@@ -227,13 +227,13 @@ class CoordinateSystem():
         return self.input_to_graph_point(x, graph)
 
     def get_graph_label(
-        self,
-        graph: ParametricCurve,
-        label: str | Mobject = "f(x)",
-        x: float | None = None,
-        direction: np.ndarray = RIGHT,
-        buff: float = MED_SMALL_BUFF,
-        color: ManimColor | None = None
+            self,
+            graph: ParametricCurve,
+            label: str | Mobject = "f(x)",
+            x: float | None = None,
+            direction: np.ndarray = RIGHT,
+            buff: float = MED_SMALL_BUFF,
+            color: ManimColor | None = None
     ) -> Tex | Mobject:
         if isinstance(label, str):
             label = Tex(label)
@@ -269,29 +269,29 @@ class CoordinateSystem():
 
     # For calculus
     def angle_of_tangent(
-        self,
-        x: float,
-        graph: ParametricCurve,
-        dx: float = EPSILON
+            self,
+            x: float,
+            graph: ParametricCurve,
+            dx: float = EPSILON
     ) -> float:
         p0 = self.input_to_graph_point(x, graph)
         p1 = self.input_to_graph_point(x + dx, graph)
         return angle_of_vector(p1 - p0)
 
     def slope_of_tangent(
-        self,
-        x: float,
-        graph: ParametricCurve,
-        **kwargs
+            self,
+            x: float,
+            graph: ParametricCurve,
+            **kwargs
     ) -> float:
         return np.tan(self.angle_of_tangent(x, graph, **kwargs))
 
     def get_tangent_line(
-        self,
-        x: float,
-        graph: ParametricCurve,
-        length: float = 5,
-        line_func: Type[T] = Line
+            self,
+            x: float,
+            graph: ParametricCurve,
+            length: float = 5,
+            line_func: Type[T] = Line
     ) -> T:
         line = line_func(LEFT, RIGHT)
         line.set_width(length)
@@ -300,17 +300,17 @@ class CoordinateSystem():
         return line
 
     def get_riemann_rectangles(
-        self,
-        graph: ParametricCurve,
-        x_range: Sequence[float] = None,
-        dx: float | None = None,
-        input_sample_type: str = "left",
-        stroke_width: float = 1,
-        stroke_color: ManimColor = BLACK,
-        fill_opacity: float = 2,
-        colors: Iterable[ManimColor] = (TEAL, DARK_BROWN),
-        stroke_background: bool = True,
-        show_signed_area: bool = True
+            self,
+            graph: ParametricCurve,
+            x_range: Sequence[float] = None,
+            dx: float | None = None,
+            input_sample_type: str = "left",
+            stroke_width: float = 1,
+            stroke_color: ManimColor = BLACK,
+            fill_opacity: float = 2,
+            colors: Iterable[ManimColor] = (TEAL, DARK_BROWN),
+            stroke_background: bool = True,
+            show_signed_area: bool = True
     ) -> VGroup:
         if x_range is None:
             x_range = self.x_range[:2]
@@ -333,8 +333,9 @@ class CoordinateSystem():
             height = get_norm(
                 self.i2gp(sample, graph) - self.c2p(sample, 0)
             )
-            rect = Rectangle(width=self.x_axis.n2p(x1)[0] - self.x_axis.n2p(x0)[0],
-                             height=height)
+            left = self.x_axis.n2p(x1)[0]
+            right = self.x_axis.n2p(x0)[0]
+            rect = Rectangle(width=left - right, height=height)
             rect.move_to(self.c2p(x0, 0), DL)
             rects.append(rect)
         result = VGroup(*rects)
@@ -368,10 +369,10 @@ class Axes(VGroup, CoordinateSystem):
     }
 
     def __init__(
-        self,
-        x_range: Sequence[float] | None = None,
-        y_range: Sequence[float] | None = None,
-        **kwargs
+            self,
+            x_range: Sequence[float] | None = None,
+            y_range: Sequence[float] | None = None,
+            **kwargs
     ):
         CoordinateSystem.__init__(self, **kwargs)
         VGroup.__init__(self, **kwargs)
@@ -396,10 +397,10 @@ class Axes(VGroup, CoordinateSystem):
         self.center()
 
     def create_axis(
-        self,
-        range_terms: Sequence[float],
-        axis_config: dict[str],
-        length: float
+            self,
+            range_terms: Sequence[float],
+            axis_config: dict[str],
+            length: float
     ) -> NumberLine:
         new_config = merge_dicts_recursively(self.axis_config, axis_config)
         new_config["width"] = length
@@ -427,10 +428,10 @@ class Axes(VGroup, CoordinateSystem):
         return [self.x_range, self.y_range]
 
     def add_coordinate_labels(
-        self,
-        x_values: Iterable[float] | None = None,
-        y_values: Iterable[float] | None = None,
-        **kwargs
+            self,
+            x_values: Iterable[float] | None = None,
+            y_values: Iterable[float] | None = None,
+            **kwargs
     ) -> VGroup:
         axes = self.get_axes()
         self.coordinate_labels = VGroup()
@@ -443,6 +444,7 @@ class Axes(VGroup, CoordinateSystem):
         self.set_fill(color, recurse=recurse)
         self.set_stroke(color, recurse=recurse)
         return self
+
 
 class ThreeDAxes(Axes):
     CONFIG = {
@@ -460,11 +462,11 @@ class ThreeDAxes(Axes):
     }
 
     def __init__(
-        self,
-        x_range: Sequence[float] | None = None,
-        y_range: Sequence[float] | None = None,
-        z_range: Sequence[float] | None = None,
-        **kwargs
+            self,
+            x_range: Sequence[float] | None = None,
+            y_range: Sequence[float] | None = None,
+            z_range: Sequence[float] | None = None,
+            **kwargs
     ):
         Axes.__init__(self, x_range, y_range, **kwargs)
         if z_range is not None:
@@ -492,16 +494,16 @@ class ThreeDAxes(Axes):
         return [self.x_range, self.y_range, self.z_range]
 
     def to_corner(
-        self,
-        corner: np.ndarray = LEFT + DOWN,
-        buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
+            self,
+            corner: np.ndarray = LEFT + DOWN,
+            buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
     ):
         return self.fix_in_frame()
 
     def to_edge(
-        self,
-        edge: np.ndarray = LEFT,
-        buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
+            self,
+            edge: np.ndarray = LEFT,
+            buff: float = DEFAULT_MOBJECT_TO_EDGE_BUFFER
     ):
         return self.fix_in_frame()
 
@@ -533,10 +535,10 @@ class NumberPlane(Axes):
     }
 
     def __init__(
-        self,
-        x_range: Sequence[float] | None = None,
-        y_range: Sequence[float] | None = None,
-        **kwargs
+            self,
+            x_range: Sequence[float] | None = None,
+            y_range: Sequence[float] | None = None,
+            **kwargs
     ):
         super().__init__(x_range, y_range, **kwargs)
         self.init_background_lines()
@@ -570,9 +572,9 @@ class NumberPlane(Axes):
         return lines1, lines2
 
     def get_lines_parallel_to_axis(
-        self,
-        axis1: NumberLine,
-        axis2: NumberLine
+            self,
+            axis1: NumberLine,
+            axis2: NumberLine
     ) -> tuple[VGroup, VGroup]:
         freq = axis2.x_step
         ratio = self.faded_line_ratio
@@ -635,8 +637,8 @@ class ComplexPlane(NumberPlane):
         return self.point_to_number(point)
 
     def get_default_coordinate_values(
-        self,
-        skip_first: bool = True
+            self,
+            skip_first: bool = True
     ) -> list[complex]:
         x_numbers = self.get_x_axis().get_tick_range()[1:]
         y_numbers = self.get_y_axis().get_tick_range()[1:]
@@ -644,10 +646,10 @@ class ComplexPlane(NumberPlane):
         return [*x_numbers, *y_numbers]
 
     def add_coordinate_labels(
-        self,
-        numbers: list[complex] | None = None,
-        skip_first: bool = True,
-        **kwargs
+            self,
+            numbers: list[complex] | None = None,
+            skip_first: bool = True,
+            **kwargs
     ):
         if numbers is None:
             numbers = self.get_default_coordinate_values(skip_first)
