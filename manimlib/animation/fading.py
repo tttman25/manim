@@ -8,6 +8,7 @@ from manimlib.mobject.mobject import Group
 from manimlib.constants import ORIGIN
 from manimlib.utils.bezier import interpolate
 from manimlib.utils.rate_functions import there_and_back
+from manimlib.mobject.svg.tex_mobject import Tex
 
 from typing import TYPE_CHECKING
 
@@ -15,7 +16,6 @@ if TYPE_CHECKING:
     from manimlib.scene.scene import Scene
     from manimlib.mobject.mobject import Mobject
     from manimlib.mobject.types.vectorized_mobject import VMobject
-    from manimlib.mobject.svg.tex_mobject import Tex
 
 
 DEFAULT_FADE_LAG_RATIO = 0
@@ -136,7 +136,25 @@ class FadeTransform(Transform):
 
 class FadeTransformPieces(FadeTransform):
     def begin(self) -> None:
+        if isinstance(self.mobject[0], Tex):
+            self.ending_mobject = self.mobject.copy()
+            Animation.begin(self)
+            start, end = self.starting_mobject, self.ending_mobject
+            for m0, m1 in ((start[1], start[0]), (end[0], end[1])):
+                self.ghost_to(m0, m1)
+            return
+        self.mobject[0].align_family(self.mobject[1])
         super().begin()
+        print('Going here')
+
+    def ghost_to(self, source: Mobject, target: Mobject) -> None:
+        if isinstance(self.mobject[0], Tex):
+            source.replace(target, stretch=self.stretch, dim_to_match=self.dim_to_match)
+            source.set_opacity(0)
+            return
+        for sm0, sm1 in zip(source.get_family(), target.get_family()):
+            super().ghost_to(sm0, sm1)
+            print('going there')
 
 
 class VFadeIn(Animation):
